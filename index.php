@@ -86,6 +86,7 @@ $cadastro = new Cadastro();
 			$(document).ready(function(){
 				
 				carrega_dados('estados');
+                carrega_dados('especialidade');
                 
 				
 				
