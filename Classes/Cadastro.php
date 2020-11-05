@@ -3,6 +3,16 @@ class Cadastro{
 	private $estado;
 	private $cidade;
 	private $especialidade;
+	private $id;
+	private $nome;
+	private $sobrenome;
+	private $dataNasc;
+	private $cpf;
+	private $email;
+	private $sexo;
+	private $uf;
+	private $crm;
+
 	private $estados = array();
 	private $cidades = array();
 	private $especialidades = array();
@@ -70,6 +80,8 @@ class Cadastro{
 		//var_dump(json_encode($this->cidades, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 		//return $result;
 	}
+
+	public function gravaDados(){}
 
 
 }

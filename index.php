@@ -27,6 +27,7 @@ $cadastro = new Cadastro();
             <h1>WEB VÍDEO AULAS</h1>
             <h3>Select Dinâmico com AJAX + PHP + MySQL</h3>
             <br />
+            <form class="form" method="POST" action="grava_dados.php">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="form-group">
@@ -76,8 +77,13 @@ $cadastro = new Cadastro();
                         <label>SELECIONE UMA ESPECIALIDADE:</label>
                         <select name="especialidade" id="especialidade" class="form-control input-lg" data-live-search="true" title="Selecione uma Especialidade"></select>
                     </div>
+
+                    <div class="form-group">
+                        <button name="submit" id="especialidade" type="submit" title="Submit">CADASTRAR</button>
+                    </div>
                 </div>
             </div>
+            </form>
         </div>
 
 		
