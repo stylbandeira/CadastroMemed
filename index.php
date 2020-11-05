@@ -103,16 +103,13 @@ $cadastro = new Cadastro();
 								html += '<option value ='+data[count].sigla+'>'+data[count].nome+'</options>';
 							}
 							if (tipo == "estados") {
-                                console.log("Estados");
 								$('#estados').html(html);
 								$('#estados').selectpicker('refresh');
 							} 
 							else if (tipo == "cidades"){
-                                console.log("Cidades");
 								$('#cidades').html(html);
 								$('#cidades').selectpicker('refresh');
 							} else {
-								console.log("Especialidades");
 								$('#especialidade').html(html);
 								$('#especialidade').selectpicker('refresh');
 							}
@@ -124,10 +121,6 @@ $cadastro = new Cadastro();
 					
 					carrega_dados('cidades', cat_id);
 				});
-                $(document).on('change', '#cidades', function(){
-                    console.log("ChangeEspecialidades");
-                    carrega_dados('especialidade');
-                });
 			});
 		</script>
 	</form>
