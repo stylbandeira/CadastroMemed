@@ -65,8 +65,8 @@ $cadastro = new Cadastro();
                     <div class="form-group">
                         <label>SEXO:</label>
                         <select name="sexo" id="sexo" class="form-control input-lg" data-live-search="true" title="Sexo">
-                        	<option value="m">Masculino</option>
-                        	<option value="f">Feminino</option>
+                        	<option value="M">Masculino</option>
+                        	<option value="F">Feminino</option>
                         </select>
                     </div>
                     <div class="form-group">

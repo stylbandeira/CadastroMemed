@@ -99,6 +99,20 @@ class Cadastro{
 			throw new Exception("Não foi possível gravar todas as informações", 1);
 			
 		}
+		$dados = array(
+			'external_id'=> $this->id,
+			'nome'=> $this->nome,
+			'sobrenome'=> $this->sobrenome,
+			'data_nascimento'=> $this->dataNasc,
+			'cpf'=> $this->cpf,
+			'email'=> $this->email,
+			'uf'=> $this->estado,
+			'sexo'=> $this->sexo,
+			'crm'=>$this->crm,
+			'especialidade'=>$this->especialidade
+		);
+		$result = $dados;//json_encode($dados, 1);
+		return $result;
 		/*
 		FAZER CURL(POST) AQUI
 		 	"ID". $this->id.
@@ -110,6 +124,45 @@ class Cadastro{
 				"</br>CRM: ".$this->crm.
 				"</br>CPF: ".$this->cpf;
 		*/
+	}
+
+	public function enviaCurlPostMemed($dados = array(), $dominio, $apiKey, $secretKey){
+		$iniciar = curl_init('https://'.$dominio.'/v1/sinapse-prescricao/usuarios?api-key='.$apiKey.'&secret-key='.$secretKey);
+
+		//curl_setopt($iniciar, CURLOPT_RETURNTRANSFER, true);
+
+		$attributes = $dados;
+		$especialidade = array(
+			'data' => array(
+				'type'=>'especialidade',
+				'id'=>'50'
+			)
+		);
+		$cidade = array(
+			'data'=> array(
+				'type'=>'cidades',
+				'id'=>'5213'
+			)
+		);
+		$relationships = array(
+			'cidade'=> $cidade,
+			'especialidade'=>$dados['especialidade']
+		);
+		
+
+		$data = array(
+			'data'=> array (
+				'type'=>'usuarios',
+				'attributes'=> $attributes,
+				'relationships'=> $relationships,
+				'especialidade'=>$especialidade
+			),
+		);
+
+		echo(json_encode($data));
+
+		//curl_setopt($iniciar, CURLOPT_POST, true);
+		//curl_setopt($iniciar, CURLOPT_POSTFIELDS, $data);
 	}
 
 

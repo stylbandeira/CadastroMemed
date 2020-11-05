@@ -14,7 +14,7 @@ if (isset($_POST['identificador'], $_POST['nome'], $_POST['sobrenome'])) {
 		$sexo = ($_POST['sexo']);
 		$crm = ($_POST['crm']);
 		$especialidade = ($_POST['especialidade']);	
-		
+
 	} catch (Exception $e) {
 		throw new Exception("Não conseguiu", 1);
 		
@@ -24,7 +24,14 @@ if (isset($_POST['identificador'], $_POST['nome'], $_POST['sobrenome'])) {
 	$cadastro = new Cadastro();
 	$gravados = $cadastro->gravaDados($id, $nome, $sobrenome, $estado, $cidade, $dataNasc, $cpf, $email, $sexo, $crm, $especialidade);
 	//PODE SER UTIL? $class_vars = get_class_vars(get_class($cadastro));
-
+	//var_dump($gravados);
+	
+	$cadastro->enviaCurlPostMemed(
+		$gravados, 
+		"sandbox.api.memed.com.br", 
+		"iJGiB4kjDGOLeDFPWMG3no9VnN7Abpqe3w1jEFm6olkhkZD6oSfSmYCm",
+		"Xe8M5GvBGCr4FStKfxXKisRo3SfYKI7KrTMkJpCAstzu2yXVN4av5nmL");
+		
 
 }
 
