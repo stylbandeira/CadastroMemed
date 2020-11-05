@@ -81,7 +81,36 @@ class Cadastro{
 		//return $result;
 	}
 
-	public function gravaDados(){}
+	public function gravaDados($id, $nome, $sobrenome, $estado ='', $cidade ='', $dataNasc ='', $cpf, $email ='', $sexo, $crm = '', $especialidade){
+
+		try {
+			$this->id = $id;
+			$this->nome = $nome;
+			$this->sobrenome = $sobrenome;
+			$this->estado = $estado;
+			$this->cidade = $cidade;
+			$this->dataNasc = $dataNasc;
+			$this->cpf = $cpf;
+			$this->email = $email;
+			$this->sexo = $sexo;
+			$this->crm = $crm;
+			$this->especialidade = $especialidade;	
+		} catch (Exception $e) {
+			throw new Exception("Não foi possível gravar todas as informações", 1);
+			
+		}
+		/*
+		FAZER CURL(POST) AQUI
+		 	"ID". $this->id.
+				"</br>Nome: ".$this->nome.
+				"</br>Sobrenome: ".$this->sobrenome.
+				"</br>Estado: ".$this->estado.
+				"</br>Cidade: ".$this->cidade.
+				"</br>Data de Nascimento: ".$this->dataNasc.
+				"</br>CRM: ".$this->crm.
+				"</br>CPF: ".$this->cpf;
+		*/
+	}
 
 
 }

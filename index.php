@@ -105,17 +105,24 @@ $cadastro = new Cadastro();
 						dataType: "json",
 						success: function (data){
 							var html = '';
-							for (var count = 0; count < data.length; count++){
-								html += '<option value ='+data[count].sigla+'>'+data[count].nome+'</options>';
-							}
+							
 							if (tipo == "estados") {
+                                for (var count = 0; count < data.length; count++){
+                                html += '<option value ='+data[count].sigla+'>'+data[count].nome+'</options>';
+                                }
 								$('#estados').html(html);
 								$('#estados').selectpicker('refresh');
 							} 
 							else if (tipo == "cidades"){
+                                for (var count = 0; count < data.length; count++){
+                                html += '<option value ='+data[count].nome+'>'+data[count].nome+'</options>';
+                                }
 								$('#cidades').html(html);
 								$('#cidades').selectpicker('refresh');
 							} else {
+                                for (var count = 0; count < data.length; count++){
+                                html += '<option value ='+data[count].nome+'>'+data[count].nome+'</options>';
+                                }
 								$('#especialidade').html(html);
 								$('#especialidade').selectpicker('refresh');
 							}
