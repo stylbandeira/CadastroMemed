@@ -21,6 +21,10 @@ class Cadastro{
 		return $this->cidade;
 	}
 
+	public function getEspecialidade(){
+		return $this->especialidade;
+	}
+
 	public function setCidade($cidade){
 		$this->cidade = $cidade;
 	}
@@ -103,13 +107,12 @@ class Cadastro{
 			'external_id'=> $this->id,
 			'nome'=> $this->nome,
 			'sobrenome'=> $this->sobrenome,
-			'data_nascimento'=> $this->dataNasc,
+			'data_nascimento'=> DateTime::createFromFormat('Y-m-d', $this->dataNasc)->format('d/m/Y'),
 			'cpf'=> $this->cpf,
 			'email'=> $this->email,
 			'uf'=> $this->estado,
 			'sexo'=> $this->sexo,
 			'crm'=>$this->crm,
-			'especialidade'=>$this->especialidade
 		);
 		$result = $dados;//json_encode($dados, 1);
 		return $result;
@@ -126,11 +129,7 @@ class Cadastro{
 		*/
 	}
 
-	public function enviaCurlPostMemed($dados = array(), $dominio, $apiKey, $secretKey){
-		$iniciar = curl_init('https://'.$dominio.'/v1/sinapse-prescricao/usuarios?api-key='.$apiKey.'&secret-key='.$secretKey);
-
-		//curl_setopt($iniciar, CURLOPT_RETURNTRANSFER, true);
-
+	public function jsonPostCadastro($dados = array()){
 		$attributes = $dados;
 		$especialidade = array(
 			'data' => array(
@@ -146,7 +145,7 @@ class Cadastro{
 		);
 		$relationships = array(
 			'cidade'=> $cidade,
-			'especialidade'=>$dados['especialidade']
+			'especialidade'=>$this->getEspecialidade()
 		);
 		
 
@@ -159,10 +158,32 @@ class Cadastro{
 			),
 		);
 
-		echo(json_encode($data));
+		return json_encode($data);
 
-		//curl_setopt($iniciar, CURLOPT_POST, true);
-		//curl_setopt($iniciar, CURLOPT_POSTFIELDS, $data);
+		
+	}
+
+	public function postJsonMemed($json, $dominio, $apiKey, $secretKey){
+		$iniciar = curl_init('https://'.
+								$dominio.'/v1/sinapse-prescricao/usuarios?api-key='.
+								$apiKey.'&secret-key='.
+								$secretKey);
+
+		
+		curl_setopt($iniciar, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($iniciar, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($iniciar, CURLOPT_SSL_VERIFYPEER, 0);
+
+		curl_setopt($iniciar, CURLOPT_POST, true);
+		curl_setopt($iniciar, CURLOPT_POSTFIELDS, $json);
+
+		if (curl_exec($iniciar) === false) {
+			echo "Curl error: ".curl_error($iniciar);
+		} else{
+			//echo "Operação concluída";
+		}	
+		curl_close($iniciar);
 	}
 
 

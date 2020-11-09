@@ -22,6 +22,16 @@ $cadastro = new Cadastro();
 
 </head>
     <body>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="index.php">Cadastro</a></li>
+                <li><a href="consulta.php">Consulta</a></li>
+            </ul>
+        </nav>
+
+
+
         <br />
         <div class="container">
             <h1>WEB VÍDEO AULAS</h1>
