@@ -25,17 +25,14 @@ if (isset($_POST['identificador'], $_POST['nome'], $_POST['sobrenome'])) {
 	$gravados = $cadastro->gravaDados($id, $nome, $sobrenome, $estado, $cidade, $dataNasc, $cpf, $email, $sexo, $crm, $especialidade);
 	//PODE SER UTIL? $class_vars = get_class_vars(get_class($cadastro));
 	//var_dump($gravados);
-	
 	$jsonMemed = $cadastro->jsonPostCadastro($gravados);
-	echo $jsonMemed;
+
+	//echo $jsonMemed;
 
 	try {
-		$cadastro->postJsonMemed(
-					$jsonMemed,  
-					"sandbox.api.memed.com.br", 
-					"iJGiB4kjDGOLeDFPWMG3no9VnN7Abpqe3w1jEFm6olkhkZD6oSfSmYCm",
-					"Xe8M5GvBGCr4FStKfxXKisRo3SfYKI7KrTMkJpCAstzu2yXVN4av5nmL");
+		$cadastro->postJsonMemed($jsonMemed, "sandbox.api.memed.com.br", "iJGiB4kjDGOLeDFPWMG3no9VnN7Abpqe3w1jEFm6olkhkZD6oSfSmYCm", "Xe8M5GvBGCr4FStKfxXKisRo3SfYKI7KrTMkJpCAstzu2yXVN4av5nmL");
 
+		//$cadastro->postPostman();
 		
 	} catch (Exception $e) {
 		throw new Exception("Não foi para a Memed", 1);

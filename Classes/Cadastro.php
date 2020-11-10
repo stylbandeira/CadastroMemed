@@ -158,16 +158,18 @@ class Cadastro{
 			),
 		);
 
-		return json_encode($data);
+		return json_encode($data, 1);
 
 		
 	}
-
+	
 	public function postJsonMemed($json, $dominio, $apiKey, $secretKey){
 		$iniciar = curl_init('https://'.
 								$dominio.'/v1/sinapse-prescricao/usuarios?api-key='.
 								$apiKey.'&secret-key='.
 								$secretKey);
+
+		curl_setopt($iniciar,CURLOPT_HTTPHEADER,array('Accept: application/vnd.api+json','Cache-Control: no-cache','Content-Type: application/json'));
 
 		
 		curl_setopt($iniciar, CURLOPT_RETURNTRANSFER, true);
@@ -178,14 +180,21 @@ class Cadastro{
 		curl_setopt($iniciar, CURLOPT_POST, true);
 		curl_setopt($iniciar, CURLOPT_POSTFIELDS, $json);
 
-		if (curl_exec($iniciar) === false) {
+		/*
+		if (!(curl_exec($iniciar) === false)) {
 			echo "Curl error: ".curl_error($iniciar);
 		} else{
-			//echo "Operação concluída";
-		}	
+			echo "Operação concluída";
+		}
+		*/	
+		$resposta = curl_exec($iniciar);
 		curl_close($iniciar);
+		echo $resposta;
 	}
 
+
+
+	
 
 }
  ?>

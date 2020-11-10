@@ -66,7 +66,7 @@ $cadastro = new Cadastro();
                     </div>
                     <div class="form-group">
                         <label>CPF:</label>
-                        <input name="cpf" id="cpf" type="number" class="form-control input-lg" data-live-search="true" title="CPF"></input>
+                        <input name="cpf" id="cpf" class="form-control input-lg" data-live-search="true" title="CPF"></input>
                     </div>
                     <div class="form-group">
                         <label>E-MAIL:</label>
