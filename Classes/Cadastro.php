@@ -17,6 +17,10 @@ class Cadastro{
 	private $cidades = array();
 	private $especialidades = array();
 
+	private $dominio = "sandbox.api.memed.com.br";
+	private $apiKey = "iJGiB4kjDGOLeDFPWMG3no9VnN7Abpqe3w1jEFm6olkhkZD6oSfSmYCm";
+	private $secretKey = "Xe8M5GvBGCr4FStKfxXKisRo3SfYKI7KrTMkJpCAstzu2yXVN4av5nmL";
+
 	public function getCidade(){
 		return $this->cidade;
 	}
@@ -189,12 +193,53 @@ class Cadastro{
 		*/	
 		$resposta = curl_exec($iniciar);
 		curl_close($iniciar);
-		echo $resposta;
+		return $resposta;
+	}
+//GET
+	public function getJsonMemed($codigoMedico){
+		$dominio = $this->dominio;
+		$apiKey = $this->apiKey;
+		$secretKey = $this->secretKey;
+		$iniciar = curl_init('https://'.
+								$dominio.'/v1/sinapse-prescricao/usuarios/'.
+								$codigoMedico.'?api-key='.
+								$apiKey.'&secret-key='.
+								$secretKey);
+		curl_setopt($iniciar, CURLOPT_HTTPHEADER, array("Accept: application/vnd.api+json"));
+
+		curl_setopt($iniciar, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($iniciar, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($iniciar, CURLOPT_SSL_VERIFYPEER, 0);
+
+		curl_setopt($iniciar, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($iniciar, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+		curl_setopt($iniciar, CURLOPT_CUSTOMREQUEST, "GET");
+		
+
+		$response = curl_exec($iniciar);
+		curl_close($iniciar);
+		return $response;
 	}
 
+	public function getTokenUsuario($codigo){
+		$medico = $this->getJsonMemed($codigo);
+		
+		$dadosUsuario = json_decode($medico, 1);
+		if (array_key_first($dadosUsuario) == 'errors') {
+			//CADASTRAR MÉDICO NA MEMED
+			$result = $medico;
+			//CADASTRAR MÉDICO NA MEMED
+		} else {
+			$result = $dadosUsuario['data']['attributes']['token'];	
+		}
+		
+		
 
-
-	
+		//$result = $dadosUsuario['data']['attributes']['token'];		
+		
+		return $result;
+		
+	}
 
 }
  ?>

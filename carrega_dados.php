@@ -1,5 +1,6 @@
 <?php 
-require "Classes/Cadastro.php";
+require_once "Classes/Cadastro.php";
+session_start();
 $cadastro = new Cadastro();
 if (isset($_POST["tipo"])) {
 	if ($_POST["tipo"] == "especialidade") {
@@ -12,4 +13,10 @@ if (isset($_POST["tipo"])) {
 		echo json_encode($cadastro->populaCidades($cat_id));
 	}
 }
+
+if (isset($_POST['codigo'])) {
+		$id_medico = $_POST['codigo'];
+		$token = $cadastro->getTokenUsuario($id_medico);
+        $_SESSION['Token'] = $token;
+    }
  ?>

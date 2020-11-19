@@ -1,0 +1,12 @@
+#tc-consulta{
+	background-color: #aaa;
+}
+
+#tc-tela{
+	background-color: #ff0055;
+}
+#tc-receita{
+	margin: auto;
+	border: 4px solid black;
+	height: 500px;
+}

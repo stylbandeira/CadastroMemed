@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once "Classes/Cadastro.php";
 
 if (isset($_POST['identificador'], $_POST['nome'], $_POST['sobrenome'])) {
@@ -24,13 +25,16 @@ if (isset($_POST['identificador'], $_POST['nome'], $_POST['sobrenome'])) {
 	$cadastro = new Cadastro();
 	$gravados = $cadastro->gravaDados($id, $nome, $sobrenome, $estado, $cidade, $dataNasc, $cpf, $email, $sexo, $crm, $especialidade);
 	//PODE SER UTIL? $class_vars = get_class_vars(get_class($cadastro));
+	$_SESSION['Medico'] = true;
+
 	//var_dump($gravados);
 	$jsonMemed = $cadastro->jsonPostCadastro($gravados);
 
 	//echo $jsonMemed;
 
 	try {
-		$cadastro->postJsonMemed($jsonMemed, "sandbox.api.memed.com.br", "iJGiB4kjDGOLeDFPWMG3no9VnN7Abpqe3w1jEFm6olkhkZD6oSfSmYCm", "Xe8M5GvBGCr4FStKfxXKisRo3SfYKI7KrTMkJpCAstzu2yXVN4av5nmL");
+		$jsonPostMemed = $cadastro->postJsonMemed($jsonMemed, "sandbox.api.memed.com.br", "iJGiB4kjDGOLeDFPWMG3no9VnN7Abpqe3w1jEFm6olkhkZD6oSfSmYCm", "Xe8M5GvBGCr4FStKfxXKisRo3SfYKI7KrTMkJpCAstzu2yXVN4av5nmL");
+		//$_SESSION['Token'] =  $jsonPostMemed['data']
 
 		//$cadastro->postPostman();
 		

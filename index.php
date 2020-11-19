@@ -27,6 +27,7 @@ $cadastro = new Cadastro();
             <ul>
                 <li><a href="index.php">Cadastro</a></li>
                 <li><a href="consulta.php">Consulta</a></li>
+                <li><a href="teleconsulta.php">Teleconsulta</a></li>
             </ul>
         </nav>
 
