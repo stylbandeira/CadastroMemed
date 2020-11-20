@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '6a8f81d2047dda291f473a7cbcb3d3bff59801ac',
+    'reference' => '63377b1a11c47c6910a8018c890e2a4230b8e751',
     'name' => 'stylbandeira/cadastromemed',
   ),
   'versions' => 
@@ -58,7 +58,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '6a8f81d2047dda291f473a7cbcb3d3bff59801ac',
+      'reference' => '63377b1a11c47c6910a8018c890e2a4230b8e751',
     ),
   ),
 );
